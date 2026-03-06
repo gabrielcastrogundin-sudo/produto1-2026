@@ -5,20 +5,20 @@ import jakarta.persistence.*;
 import java.util.Objects;
 
 @Entity
-@Table(name = "tb_categorie")
-public class Categorie {
+@Table(name = "tb_category")
+public class Category {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String nome;
 
-    public Categorie(Long id, String nome) {
+    public Category(Long id, String nome) {
         this.id = id;
         this.nome = nome;
     }
 
-    public Categorie() {
+    public Category() {
 
     }
 
@@ -41,8 +41,8 @@ public class Categorie {
     @Override
     public boolean equals(Object o) {
         if (o == null || getClass() != o.getClass()) return false;
-        Categorie categorie = (Categorie) o;
-        return Objects.equals(id, categorie.id);
+        Category category = (Category) o;
+        return Objects.equals(id, category.id);
     }
 
     @Override
