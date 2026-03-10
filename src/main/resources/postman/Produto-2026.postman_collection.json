@@ -1,0 +1,24 @@
+{
+	"info": {
+		"_postman_id": "317420e0-79f4-4543-a47d-18a562265ad5",
+		"name": "Produto-2026",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "53076316",
+		"_collection_link": "https://augustoleal11-5999273.postman.co/workspace/Augusto-Leal's-Workspace~dbad4f87-eaf3-406c-8465-8b851aa5d026/collection/53076316-317420e0-79f4-4543-a47d-18a562265ad5?action=share&source=collection_link&creator=53076316"
+	},
+	"item": [
+		{
+			"name": "categoria",
+			"item": [
+				{
+					"name": "getall",
+					"request": {
+						"method": "GET",
+						"header": []
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}

@@ -1,22 +1,29 @@
 package br.ifmg.produto1_2026.dto;
 
+import br.ifmg.produto1_2026.entities.Categoria;
+
 public class CategoriaDTO {
-    private int id;
+    private Long id;
     private String nome;
 
     public CategoriaDTO() {
     }
 
-    public CategoriaDTO(String nome, int id) {
+    public CategoriaDTO(String nome, Long id) {
         this.nome = nome;
         this.id = id;
     }
 
-    public int getId() {
+    public CategoriaDTO(Categoria categoria) {
+        this.nome = categoria.getNome();
+        this.id = categoria.getId();
+    }
+
+    public Long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
