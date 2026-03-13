@@ -44,4 +44,12 @@ public class CategoriaService {
         // Convertemos entity para categoriaDTO
         return new CategoriaDTO(categoria);
     }
+
+    @Transactional
+    public CategoriaDTO insert(CategoriaDTO dto) {
+        Categoria entity = new Categoria();
+        entity.setNome(dto.getNome());
+        Categoria nova = categoriaRepository.save(entity);
+        return new CategoriaDTO(nova);
+    }
 }
