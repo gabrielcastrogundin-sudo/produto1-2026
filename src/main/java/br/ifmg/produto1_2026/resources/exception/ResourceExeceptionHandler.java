@@ -23,7 +23,19 @@ public class ResourceExeceptionHandler {
         error.setPath(req.getRequestURI());
 
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body(error);
+    }
 
+    @ExceptionHandler(databaseException.class)
+    public ResponseEntity<StandartError> databaseIntegrity(databaseException e, HttpServletRequest req){
+
+        StandartError error = new StandartError();
+        error.setStatus(HttpStatus.BAD_REQUEST.value());
+        error.setMessage(e.getMessage());
+        error.setError("Erro de integridade no banco de dados");
+        error.setTimestamp(Instant.now());
+        error.setPath(req.getRequestURI());
+
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(error);
     }
 
 }

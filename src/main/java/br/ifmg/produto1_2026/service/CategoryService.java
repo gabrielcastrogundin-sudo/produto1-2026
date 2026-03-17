@@ -20,6 +20,20 @@ public class CategoryService {
 
     @Autowired
     private CategoryRepository categoryRepository;
+
+    public CategoryDTO update(Long id, CategoryDTO dto) {
+
+        if(!categoryRepository.existsById(id)){
+            throw new ResourceNotFound("Categoria não encontrada, para update");
+        }
+
+        Category entity = categoryRepository.getReferenceById(id);
+
+        entity.setNome(dto.getName());
+        entity = categoryRepository.save(entity);
+        return new CategoryDTO(entity);
+    }
+
     @Transactional(readOnly = true)
     public List<CategoryDTO> findAll(){
         //Lista com os dados do bd

@@ -2,6 +2,7 @@ package br.ifmg.produto1_2026.entities;
 
 import jakarta.persistence.*;
 
+import java.time.Instant;
 import java.util.Objects;
 
 @Entity
@@ -13,6 +14,11 @@ public class Category {
     private Long id;
     private String nome;
 
+    @Column(columnDefinition = "TIMESTAMP WITHOUT TIME ZONE")
+    private Instant updated_at;
+    @Column(columnDefinition = "TIMESTAMP WITHOUT TIME ZONE")
+    private Instant created_at;
+
     public Category(Long id, String nome) {
         this.id = id;
         this.nome = nome;
@@ -21,6 +27,10 @@ public class Category {
     public Category() {
 
     }
+
+    public Instant getUpdatedAt() { return updated_at; }
+
+    public Instant getCreatedAt() { return created_at; }
 
     public Long getId() {
         return id;
@@ -38,6 +48,16 @@ public class Category {
         this.nome = nome;
     }
 
+    @PrePersist
+    public void prePersist() {
+        this.created_at = Instant.now();
+    }
+
+    @PreUpdate
+    public void preUpdate() {
+        this.updated_at = Instant.now();
+    }
+
     @Override
     public boolean equals(Object o) {
         if (o == null || getClass() != o.getClass()) return false;
@@ -52,7 +72,7 @@ public class Category {
 
     @Override
     public String toString() {
-        return "Categorie{" +
+        return "Category{" +
                 "id=" + id +
                 ", nome='" + nome + '\'' +
                 '}';

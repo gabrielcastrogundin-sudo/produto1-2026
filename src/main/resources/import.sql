@@ -1,5 +1,5 @@
-insert into tb_category (nome) value ('Livros');
-insert into tb_category (nome) value ('Canecas');
-insert into tb_category (nome) value ('Lapis');
-insert into tb_category (nome) value ('Borrachas');
-insert into tb_category (nome) value ('Isqueiro');
+insert into tb_category (nome,created_at) values ('Livros', NOW());
+insert into tb_category (nome,created_at) values ('Canecas', NOW());
+insert into tb_category (nome,created_at) values ('Lapis', NOW());
+insert into tb_category (nome,created_at) values ('Borrachas', NOW());
+insert into tb_category (nome,created_at) values ('Isqueiro', NOW());

@@ -18,8 +18,10 @@ public class categoryResource {
     private CategoryService categoryService;
 
     @GetMapping
-    public ResponseEntity<List<CategoryDTO>> categories(){
-
+    public ResponseEntity<List<CategoryDTO>> categories( @RequestParam(value = "page", defaultValue = "0") Integer page,
+                                                         @RequestParam(value = "linesPerPage", defaultValue = "10") Integer linesPerPage,
+                                                         @RequestParam(value = "direction", defaultValue = "ASC") String direction,
+                                                         @RequestParam(value = "sort", defaultValue = "id") String sort){
 
         List<CategoryDTO> categories = categoryService.findAll();
 
@@ -46,4 +48,17 @@ public class categoryResource {
         // enviadno a categoria criada
         return ResponseEntity.created(location).body(returnDTO);
     }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> delete(@PathVariable Long id){
+        categoryService.delete(id);
+        return ResponseEntity.noContent().build();
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<CategoryDTO> update(@PathVariable Long id, @RequestBody CategoryDTO dto){
+        CategoryDTO returnDto = categoryService.update(id,dto);
+        return ResponseEntity.ok().body(returnDto);
+    }
+
 }
