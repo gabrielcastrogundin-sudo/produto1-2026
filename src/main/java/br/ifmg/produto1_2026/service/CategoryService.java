@@ -8,7 +8,6 @@ import br.ifmg.produto1_2026.service.exception.ResourceNotFound;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -43,13 +42,13 @@ public class CategoryService {
         Page<Category> categories = categoryRepository.findAll(pageable);
 
         //Lista de dados convertidos em DTO
-        List<CategoryDTO> categoryDTO = new ArrayList<CategoryDTO>();
+//        List<CategoryDTO> categoryDTO = new ArrayList<CategoryDTO>();
 
 //        for (Category category : categories) {
 //            categoryDTO.add(new CategoryDTO(category));
 //        }
 
-        return categories.map(x -> new CategoryDTO(x));
+        return categories.map(CategoryDTO::new);
     }
 
     @Transactional(readOnly = true)

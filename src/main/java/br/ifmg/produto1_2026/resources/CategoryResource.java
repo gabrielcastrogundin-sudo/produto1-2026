@@ -53,7 +53,10 @@ public class CategoryResource {
         CategoryDTO returnDTO = categoryService.insert(dto);
 
         // link da categoria criada
-        URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(returnDTO.getId()).toUri();
+        URI location = ServletUriComponentsBuilder
+                .fromCurrentRequest().path("/{id}")
+                .buildAndExpand(returnDTO.getId())
+                .toUri();
 
         // enviadno a categoria criada
         return ResponseEntity.created(location).body(returnDTO);
