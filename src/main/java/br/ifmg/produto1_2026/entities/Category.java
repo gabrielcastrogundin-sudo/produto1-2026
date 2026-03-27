@@ -3,7 +3,9 @@ package br.ifmg.produto1_2026.entities;
 import jakarta.persistence.*;
 
 import java.time.Instant;
+import java.util.HashSet;
 import java.util.Objects;
+import java.util.Set;
 
 @Entity
 @Table(name = "tb_category")
@@ -18,6 +20,9 @@ public class Category {
     private Instant updated_at;
     @Column(columnDefinition = "TIMESTAMP WITHOUT TIME ZONE")
     private Instant created_at;
+
+    @ManyToMany(mappedBy = "categories")
+    private Set<Product> products = new HashSet<Product>();
 
     public Category(Long id, String nome) {
         this.id = id;

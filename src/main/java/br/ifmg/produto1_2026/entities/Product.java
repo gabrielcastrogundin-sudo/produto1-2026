@@ -4,7 +4,9 @@ package br.ifmg.produto1_2026.entities;
 import jakarta.persistence.*;
 
 import java.time.Instant;
+import java.util.HashSet;
 import java.util.Objects;
+import java.util.Set;
 
 @Entity
 @Table(name = "tb_product")
@@ -24,6 +26,14 @@ public class Product {
     private Instant updated_at;
     @Column(columnDefinition = "TIMESTAMP WITHOUT TIME ZONE")
     private Instant created_at;
+
+    @ManyToMany
+    @JoinTable(
+            name = "tb_product_has_category",
+            joinColumns = @JoinColumn(name = "id_product"),
+            inverseJoinColumns = @JoinColumn(name = "id_category")
+    )
+    private Set<Category> categories = new HashSet<Category>();
 
     public Product(Long id, String name, String description, Double price, String imgUrl) {
         this.id = id;
@@ -88,6 +98,14 @@ public class Product {
     @PreUpdate
     public void preUpdate() {
         this.updated_at = Instant.now();
+    }
+
+    public Set<Category> getCategories() {
+        return categories;
+    }
+
+    public void setCategories(Set<Category> categories) {
+        this.categories = categories;
     }
 
     @Override
