@@ -1,7 +1,10 @@
 package br.ifmg.produto1_2026.service;
 
+import br.ifmg.produto1_2026.dto.CategoryDTO;
 import br.ifmg.produto1_2026.dto.ProductDTO;
+import br.ifmg.produto1_2026.entities.Category;
 import br.ifmg.produto1_2026.entities.Product;
+import br.ifmg.produto1_2026.repositories.CategoryRepository;
 import br.ifmg.produto1_2026.repositories.ProductRepository;
 import br.ifmg.produto1_2026.resources.exception.databaseException;
 import br.ifmg.produto1_2026.service.exception.ResourceNotFound;
@@ -16,6 +19,8 @@ import org.springframework.transaction.annotation.Transactional;
 public class ProductService {
     @Autowired
     private ProductRepository productRepository;
+    @Autowired
+    private CategoryRepository categoryRepository;
 
     @Transactional(readOnly = true)
     public Page<ProductDTO> findAll(Pageable pageable) {
@@ -43,9 +48,15 @@ public class ProductService {
         product.setName(productDTO.getName());
         product.setDescription(productDTO.getDescription());
         product.setPrice(productDTO.getPrice());
+        product.setImgUrl(productDTO.getImgUrl());
+
+
+        for(CategoryDTO dto : productDTO.getCategories()){
+            Category category = categoryRepository.getReferenceById(dto.getId());
+            product.getCategories().add(category);
+        }
 
         productRepository.save(product);
-
         return new ProductDTO(product);
     }
 

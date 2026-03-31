@@ -20,8 +20,6 @@ public class PerfilDTO {
         this.nome = perfil.getNome();
     }
 
-    public PerfilDTO() {}
-
     public Long getId() {
         return id;
     }

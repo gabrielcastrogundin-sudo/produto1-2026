@@ -1,7 +1,10 @@
 package br.ifmg.produto1_2026.service;
 
+import br.ifmg.produto1_2026.dto.PerfilDTO;
 import br.ifmg.produto1_2026.dto.UserDTO;
+import br.ifmg.produto1_2026.entities.Perfil;
 import br.ifmg.produto1_2026.entities.User;
+import br.ifmg.produto1_2026.repositories.PerfilRepository;
 import br.ifmg.produto1_2026.repositories.UserRepository;
 import br.ifmg.produto1_2026.resources.exception.databaseException;
 import br.ifmg.produto1_2026.service.exception.ResourceNotFound;
@@ -16,6 +19,8 @@ import org.springframework.transaction.annotation.Transactional;
 public class UserService {
     @Autowired
     private UserRepository userRepository;
+    @Autowired
+    private PerfilRepository perfilRepository;
 
     @Transactional(readOnly = true)
     public Page<UserDTO> findAll(Pageable pageable) {
@@ -43,6 +48,11 @@ public class UserService {
         user.setName(userDTO.getName());
         user.setPhone(userDTO.getPhone());
         user.setEmail(userDTO.getEmail());
+
+        for(PerfilDTO dto : userDTO.getPerfils()){
+            Perfil perfil = perfilRepository.getReferenceById(dto.getId());
+            user.getPerfils().add(perfil);
+        }
 
         userRepository.save(user);
 

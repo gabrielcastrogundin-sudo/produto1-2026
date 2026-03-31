@@ -1,10 +1,14 @@
 package br.ifmg.produto1_2026.dto;
 
+import br.ifmg.produto1_2026.entities.Perfil;
 import br.ifmg.produto1_2026.entities.User;
 import jakarta.persistence.*;
 
 import java.time.Instant;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
+import java.util.Set;
 
 public class UserDTO {
 
@@ -13,6 +17,7 @@ public class UserDTO {
     private String phone;
     private String email;
     private String password;
+    private List<PerfilDTO> perfils;
 
     public UserDTO(Long id, String name, String phone, String email,  String password) {
         this.id = id;
@@ -28,6 +33,9 @@ public class UserDTO {
         this.phone = user.getPhone();
         this.email = user.getEmail();
         this.password = user.getPassword();
+        this.perfils = new ArrayList<>();
+
+        user.getPerfils().forEach(perfil -> this.perfils.add(new PerfilDTO(perfil)));
     }
 
     public UserDTO() {
@@ -73,6 +81,13 @@ public class UserDTO {
         this.email = email;
     }
 
+    public List<PerfilDTO> getPerfils() {
+        return perfils;
+    }
+
+    public void setPerfils(List<PerfilDTO> perfils) {
+        this.perfils = perfils;
+    }
 
     @Override
     public boolean equals(Object o) {
