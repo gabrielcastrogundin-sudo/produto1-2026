@@ -31,7 +31,7 @@ public class CategoryService {
 
         Category entity = categoryRepository.getReferenceById(id);
 
-        entity.setNome(dto.getName());
+        entity.setName(dto.getName());
         entity = categoryRepository.save(entity);
         return new CategoryDTO(entity);
     }
@@ -63,7 +63,7 @@ public class CategoryService {
     @Transactional
     public CategoryDTO insert(CategoryDTO dto) {
         Category category = new Category();
-        category.setNome(dto.getName());
+        category.setName(dto.getName());
 
         Category newCategory = categoryRepository.save(category);
         return new CategoryDTO(newCategory);

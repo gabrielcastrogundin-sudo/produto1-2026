@@ -12,7 +12,7 @@ public class CategoryDTO {
     }
 
     public CategoryDTO(Category category) {
-        this.name = category.getNome();
+        this.name = category.getName();
         this.id = category.getId();
     }
 
