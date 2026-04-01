@@ -20,7 +20,6 @@ insert into tb_product_category(id_product, id_category) values (3, 1);
 insert into tb_product_category(id_product, id_category) values (3, 3);
 insert into tb_product_category(id_product, id_category) values (3, 4);
 insert into tb_product_category(id_product, id_category) values (4, 1);
-insert into tb_product_category(id_product, id_category) values (5, 3);
 
 insert into tb_perfil (name) values ('ROLE_ADMINISTRATOR');
 insert into tb_perfil (name) values ('ROLE_SALESMAN');
