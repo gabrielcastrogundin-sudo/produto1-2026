@@ -12,14 +12,13 @@ insert into tb_product (name, description, price, img_url,created_at) values ('E
 insert into tb_product (name, description, price, img_url,created_at) values ('ESTRELA04', 'BRINQUEDO ELETRICO', 30.40, 'LINKDAIMAGEM', NOW());
 insert into tb_product (name, description, price, img_url,created_at) values ('ESTRELA05', 'BRINQUEDO ELETRICO', 30.40, 'LINKDAIMAGEM', NOW());
 
-insert into tb_product_category(id_product, id_category) values (1, 1);
+insert into tb_product_category(tb_product, tb_category) values (1, 1);
 insert into tb_product_category(id_product, id_category) values (1, 2);
 insert into tb_product_category(id_product, id_category) values (2, 1);
 insert into tb_product_category(id_product, id_category) values (2, 3);
 insert into tb_product_category(id_product, id_category) values (3, 1);
 insert into tb_product_category(id_product, id_category) values (3, 3);
-insert into tb_product_category(id_product, id_category) values (3, 4);
-insert into tb_product_category(id_product, id_category) values (4, 1);
+insert into tb_product_category(id_product, id_category) values (3, 3);
 
 insert into tb_perfil (name) values ('ROLE_ADMINISTRATOR');
 insert into tb_perfil (name) values ('ROLE_SALESMAN');

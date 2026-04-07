@@ -3,7 +3,7 @@ package br.ifmg.produto1_2026.util;
 import br.ifmg.produto1_2026.entities.User;
 import org.springframework.stereotype.Component;
 
-@Component
+//@Component
 public class NotificationEmail implements Notificator {
 
     private boolean upperCase;
@@ -21,4 +21,19 @@ public class NotificationEmail implements Notificator {
                 user.getName(), user.getEmail(), serverSmpt, message);
     }
 
+    public boolean isUpperCase() {
+        return upperCase;
+    }
+
+    public void setUpperCase(boolean upperCase) {
+        this.upperCase = upperCase;
+    }
+
+    public String getServerSmpt() {
+        return serverSmpt;
+    }
+
+    public void setServerSmpt(String serverSmpt) {
+        this.serverSmpt = serverSmpt;
+    }
 }
