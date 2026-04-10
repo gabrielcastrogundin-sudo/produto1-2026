@@ -1,0 +1,2 @@
+spring.profiles.name=produto2026
+spring.jpa.open-in-view = true

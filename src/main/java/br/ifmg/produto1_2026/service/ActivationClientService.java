@@ -1,10 +1,13 @@
 package br.ifmg.produto1_2026.service;
 
+import br.ifmg.produto1_2026.anotations.NotifierType;
+import br.ifmg.produto1_2026.constants.NotificationTypes;
 import br.ifmg.produto1_2026.entities.User;
 import br.ifmg.produto1_2026.util.Notificator;
 import jakarta.annotation.PostConstruct;
 import jakarta.annotation.PreDestroy;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -13,16 +16,19 @@ import java.util.List;
 public class ActivationClientService {
 
     //    @Autowired
-//    private Notificator notificator;
-    private List<Notificator> notificators;
+//    @NotifierType(value = NotificationTypes.EMAIL)
     @Autowired
-    public ActivationClientService(List<Notificator> notificators) {
+    private Notificator notificator;
 
-        System.out.println("Iniciando Ativação cliente");
-
-        this.notificators = notificators;
-
-    }
+//    private List<Notificator> notificators;
+//    @Autowired
+//    public ActivationClientService(List<Notificator> notificators) {
+//
+//        System.out.println("Iniciando Ativação cliente");
+//
+//        this.notificators = notificators;
+//
+//    }
 
 //    outra forma de utilizar o autowired para instanciar e injetar classes
 
@@ -33,10 +39,12 @@ public class ActivationClientService {
 
     public void activate(User user, String message) {
 
-//        notificators.notify_user(user, message);
-        for (Notificator notificator : notificators) {
+        if(notificator != null){
             notificator.notify_user(user, message);
         }
+//        for (Notificator notificator : notificators) {
+//            notificator.notify_user(user, message);
+//        }
     }
 
     @PostConstruct

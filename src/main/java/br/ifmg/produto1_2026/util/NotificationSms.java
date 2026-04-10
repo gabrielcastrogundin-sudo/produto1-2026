@@ -1,6 +1,7 @@
 package br.ifmg.produto1_2026.util;
 
 import br.ifmg.produto1_2026.entities.User;
+import org.springframework.beans.factory.annotation.Qualifier;
 
 //@Component
 public class NotificationSms implements Notificator {
@@ -8,7 +9,7 @@ public class NotificationSms implements Notificator {
     private boolean upperCase;
 
     public NotificationSms() {
-        System.out.println("Sms enviado com sucesso!");
+        System.out.println("Sms criado com sucesso!");
     }
     public void notify_user(User user, String message) {
         if(upperCase) {

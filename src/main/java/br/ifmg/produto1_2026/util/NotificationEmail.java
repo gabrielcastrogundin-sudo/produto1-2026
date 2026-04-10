@@ -1,6 +1,7 @@
 package br.ifmg.produto1_2026.util;
 
 import br.ifmg.produto1_2026.entities.User;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 
 //@Component
@@ -10,7 +11,7 @@ public class NotificationEmail implements Notificator {
     private String serverSmpt;
 
     public NotificationEmail(String serverSmpt) {
-        System.out.println("Email enviado com sucesso!");
+        System.out.println("Email criado com sucesso!");
         this.serverSmpt = serverSmpt;
     }
     public void notify_user(User user, String message) {
