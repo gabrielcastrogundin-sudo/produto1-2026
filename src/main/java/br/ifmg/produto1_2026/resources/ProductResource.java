@@ -82,13 +82,40 @@ public class ProductResource {
         return ResponseEntity.created(location).body(returnDTO);
     }
 
+
     @DeleteMapping("/id")
+    @Operation(
+            description = "A plataforma precisa disponibilizar deleção de produtos",
+            summary = "Endpoint para deletar um produto",
+            responses = {
+                    @ApiResponse( description = "Sucesso",responseCode = "204"),
+                    @ApiResponse( description = "Requisição mal feita",responseCode = "400", content = {}),
+                    @ApiResponse( description = "Não autorizado",responseCode = "401"),
+                    @ApiResponse( description = "Proibido no seu perfil",responseCode = "403"),
+                    @ApiResponse( description = "Não encontrado",responseCode = "404"),
+                    @ApiResponse( description = "Erro ao processar",responseCode = "422"),
+            }
+
+    )
     public ResponseEntity<Void> delete(@PathVariable Long id) {
         productService.delete(id);
         return ResponseEntity.noContent().build();
     }
 
-    @PutMapping("/id")
+    @PutMapping(value = "/id", produces = "application/json")
+    @Operation(
+            description = "A plataforma precisa disponibilizar atualização de produtos",
+            summary = "Endpoint para atualizar um produto",
+            responses = {
+                    @ApiResponse( description = "Ok",responseCode = "200"),
+                    @ApiResponse( description = "Requisição mal feita",responseCode = "400", content = {}),
+                    @ApiResponse( description = "Não autorizado",responseCode = "401"),
+                    @ApiResponse( description = "Proibido no seu perfil",responseCode = "403"),
+                    @ApiResponse( description = "Não encontrado",responseCode = "404"),
+                    @ApiResponse( description = "Erro ao processar",responseCode = "422"),
+            }
+
+    )
     public ResponseEntity<ProductDTO> update(@PathVariable Long id, @RequestBody ProductDTO dto) {
         ProductDTO returnDTO =  productService.update(id, dto);
         return ResponseEntity.ok().body(returnDTO);

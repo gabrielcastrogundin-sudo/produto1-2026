@@ -11,3 +11,4 @@ spring.h2.console.enabled=true
 # JPA/Hibernate Settings
 spring.jpa.database-platform=org.hibernate.dialect.H2Dialect
 spring.jpa.hibernate.ddl-auto=update
+springdoc.api-docs.path=/api-docs
