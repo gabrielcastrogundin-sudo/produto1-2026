@@ -11,11 +11,22 @@ spring.h2.console.enabled=true
 # JPA/Hibernate Settings
 spring.jpa.database-platform=org.hibernate.dialect.H2Dialect
 spring.jpa.hibernate.ddl-auto=update
-springdoc.api-docs.path=/api-docs
+springdoc.api-doc.path=/api-docs
 
-
+# nivel global
 logging.level.root=INFO
+# nivel especifico do spring
+logging.level.org.springframework=WARN
+# nivel do seu pacote
+logging.level.br.ifmg.produto1_2026.service=ERROR
+# nivel especifico do spring
+logging.level.org.hibernate=WARN
 
-loggin.level.org.springframework=WARN
+logging.file.name= logs/app.log
 
-loggin.level.br.ifmg.produto1_2026.service=ERROR
+spring.mail.host=${EMAIL_HOST:smtp.gmail.com}
+spring.mail.port=${EMAIL_PORT:587}
+spring.mail.username=${EMAIL_USERNAME:}
+spring.mail.password=${EMAIL_PASSWORD}
+spring.mail.properties.mail.smtp.auth=true
+spring.mail.properties.mail.smtp.starttls.enable=true

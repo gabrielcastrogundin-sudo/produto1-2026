@@ -10,3 +10,5 @@
 2026-04-24T11:28:38.370-03:00  INFO 10308 --- [main] b.i.p.Produto12026Application            : Started Produto12026Application in 3.106 seconds (process running for 3.355)
 2026-04-24T11:28:38.372-03:00  WARN 10308 --- [main] o.s.core.events.SpringDocAppInitializer  : SpringDoc /v3/api-docs endpoint is enabled by default. To disable it in production, set the property 'springdoc.api-docs.enabled=false'
 2026-04-24T11:28:38.372-03:00  WARN 10308 --- [main] o.s.core.events.SpringDocAppInitializer  : SpringDoc /swagger-ui.html endpoint is enabled by default. To disable it in production, set the property 'springdoc.swagger-ui.enabled=false'
+2026-04-24T11:39:56.918-03:00  INFO 10308 --- [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2026-04-24T11:39:56.920-03:00  INFO 10308 --- [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
