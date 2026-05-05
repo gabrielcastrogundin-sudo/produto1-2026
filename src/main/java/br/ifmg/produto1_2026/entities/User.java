@@ -24,7 +24,7 @@ public class User {
     @Column(columnDefinition = "TIMESTAMP WITHOUT TIME ZONE")
     private Instant updated_at;
 
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(
             name = "tb_user_perfil",
             joinColumns = @JoinColumn(name = "id_user"),
@@ -94,6 +94,14 @@ public class User {
     public Instant getUpdated_at() { return updated_at; }
 
     public Instant getCreated_at() { return created_at; }
+
+    public void addRole(Perfil perfil) {
+        this.perfils.add(perfil);
+    }
+
+    public void hasRole(Perfil perfil) {
+        this.perfils.contains(perfil);
+    }
 
     @PrePersist
     public void prePersist() {

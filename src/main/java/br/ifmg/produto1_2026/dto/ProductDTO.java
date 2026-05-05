@@ -2,6 +2,8 @@ package br.ifmg.produto1_2026.dto;
 
 import br.ifmg.produto1_2026.entities.Product;
 import io.swagger.v3.oas.annotations.media.Schema;
+import jakarta.validation.constraints.Positive;
+import jakarta.validation.constraints.Size;
 import org.springframework.hateoas.RepresentationModel;
 
 import java.util.ArrayList;
@@ -13,11 +15,13 @@ public class ProductDTO extends RepresentationModel<ProductDTO> {
     private Long id;
 
     @Schema(description = "nome do produto")
+    @Size(min = 2, max = 100, message = "O nome do produto deve ter entre 2 e 100 caracteres")
     private String name;
 
     @Schema(description = "descrição do produto")
     private String description;
     @Schema(description = "preço do produto")
+    @Positive(message = "O preço do produto deve ser positivo")
     private Double price;
     @Schema(description = "url da imagem do produto")
     private String imgUrl;

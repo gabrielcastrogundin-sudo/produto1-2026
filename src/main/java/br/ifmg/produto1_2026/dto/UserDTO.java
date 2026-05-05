@@ -3,6 +3,8 @@ package br.ifmg.produto1_2026.dto;
 import br.ifmg.produto1_2026.entities.Perfil;
 import br.ifmg.produto1_2026.entities.User;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotBlank;
 
 import java.time.Instant;
 import java.util.ArrayList;
@@ -13,18 +15,19 @@ import java.util.Set;
 public class UserDTO {
 
     private Long id;
+    @NotBlank(message = "Campo nome obrigatório")
     private String name;
     private String phone;
+    @NotBlank(message = "Email obrigatório")
+    @Email(message = "Email inválido")
     private String email;
-    private String password;
     private List<PerfilDTO> perfils;
 
-    public UserDTO(Long id, String name, String phone, String email,  String password) {
+    public UserDTO(Long id, String name, String phone, String email) {
         this.id = id;
         this.name = name;
         this.phone = phone;
         this.email = email;
-        this.password = password;
     }
 
     public UserDTO(User user) {
@@ -32,7 +35,6 @@ public class UserDTO {
         this.name = user.getName();
         this.phone = user.getPhone();
         this.email = user.getEmail();
-        this.password = user.getPassword();
         this.perfils = new ArrayList<>();
 
         user.getPerfils().forEach(perfil -> this.perfils.add(new PerfilDTO(perfil)));
@@ -53,16 +55,8 @@ public class UserDTO {
         return name;
     }
 
-    public String getPassword() {
-        return name;
-    }
-
     public void setName(String name) {
         this.name = name;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
     }
 
     public String getPhone() {
@@ -108,7 +102,6 @@ public class UserDTO {
                 ", name='" + name + '\'' +
                 ", phone='" + phone + '\'' +
                 ", email='" + email + '\'' +
-                ", password='" + password + '\'' +
                 '}';
     }
 }

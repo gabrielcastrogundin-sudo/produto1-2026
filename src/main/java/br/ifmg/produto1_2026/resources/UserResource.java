@@ -1,7 +1,9 @@
 package br.ifmg.produto1_2026.resources;
 
 import br.ifmg.produto1_2026.dto.UserDTO;
+import br.ifmg.produto1_2026.dto.UserInsertDTO;
 import br.ifmg.produto1_2026.service.UserService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -34,7 +36,7 @@ public class UserResource {
     }
 
     @PostMapping
-    public ResponseEntity<UserDTO> insert(@RequestBody UserDTO dto) {
+    public ResponseEntity<UserDTO> insert(@RequestBody @Valid UserInsertDTO dto) {
         UserDTO returnDTO =  userService.insert(dto);
 
         URI location = ServletUriComponentsBuilder
@@ -53,7 +55,7 @@ public class UserResource {
     }
 
     @PutMapping("/id")
-    public ResponseEntity<UserDTO> update(@PathVariable Long id, @RequestBody UserDTO dto) {
+    public ResponseEntity<UserDTO> update(@PathVariable Long id, @RequestBody @Valid UserDTO dto) {
         UserDTO returnDTO =  userService.update(id, dto);
         return ResponseEntity.ok().body(returnDTO);
     }
