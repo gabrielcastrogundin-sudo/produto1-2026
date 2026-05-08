@@ -4,6 +4,8 @@ import br.ifmg.produto1_2026.service.exception.ResourceNotFound;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.FieldError;
+import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
@@ -36,6 +38,23 @@ public class ResourceExeceptionHandler {
         error.setPath(req.getRequestURI());
 
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(error);
+    }
+
+    @ExceptionHandler(MethodArgumentNotValidException.class)
+    public ResponseEntity<StandartError> MethodArgumentNotValidException(MethodArgumentNotValidException e, HttpServletRequest req){
+
+        ValidationError error = new ValidationError();
+        error.setStatus(HttpStatus.UNPROCESSABLE_ENTITY.value());
+        error.setMessage(e.getMessage());
+        error.setError("Erro de integridade no banco de dados");
+        error.setTimestamp(Instant.now());
+        error.setPath(req.getRequestURI());
+
+        for(FieldError field: e.getBindingResult().getFieldErrors()){
+            error.addFieldMessage( new FieldMessage(field.getField(),field.getDefaultMessage()));
+        }
+
+        return ResponseEntity.status(HttpStatus.UNPROCESSABLE_ENTITY).body(error);
     }
 
 }

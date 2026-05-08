@@ -2,12 +2,13 @@ package br.ifmg.produto1_2026.entities;
 
 
 import jakarta.persistence.*;
+import org.springframework.security.core.GrantedAuthority;
 
 import java.util.Objects;
 
 @Entity
 @Table(name = "tb_perfil")
-public class Perfil {
+public class Perfil implements GrantedAuthority{
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -55,5 +56,10 @@ public class Perfil {
                 "id=" + id +
                 ", name='" + name + '\'' +
                 '}';
+    }
+
+    @Override
+    public String getAuthority() {
+        return name;
     }
 }

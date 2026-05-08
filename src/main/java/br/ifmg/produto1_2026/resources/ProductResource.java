@@ -5,6 +5,7 @@ import br.ifmg.produto1_2026.service.ProductService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -70,7 +71,7 @@ public class ProductResource {
             }
 
     )
-    public ResponseEntity<ProductDTO> insert(@RequestBody ProductDTO dto) {
+    public ResponseEntity<ProductDTO> insert(@RequestBody @Valid ProductDTO dto) {
         ProductDTO returnDTO =  productService.insert(dto);
 
         URI location = ServletUriComponentsBuilder
@@ -116,7 +117,7 @@ public class ProductResource {
             }
 
     )
-    public ResponseEntity<ProductDTO> update(@PathVariable Long id, @RequestBody ProductDTO dto) {
+    public ResponseEntity<ProductDTO> update(@PathVariable Long id, @RequestBody @Valid ProductDTO dto) {
         ProductDTO returnDTO =  productService.update(id, dto);
         return ResponseEntity.ok().body(returnDTO);
     }
