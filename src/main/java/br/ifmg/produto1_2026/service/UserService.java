@@ -107,14 +107,22 @@ public class UserService implements UserDetailsService {
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 
-        List<UserDetailsProjection> dados =
+        List<UserDetailsProjection> dbData =
             userRepository.loadUserByUsername(username);
 
-        if(dados.isEmpty()) {
+        if(dbData.isEmpty()) {
             throw new UsernameNotFoundException(username);
         }
 
         User user = new User();
+        user.setPassword(dbData.getFirst().getPassword());
+        user.setEmail(dbData.getFirst().getUsername());
+
+        for(UserDetailsProjection data: dbData) {
+            user.addRole(
+                    new Perfil(data.getRoleId(), data.getAuthority())
+            );
+        }
 
         return null;
     }

@@ -20,7 +20,7 @@ public class SalesResource {
 
     public SalesResource(ActivationClientService activationClientService) {
         this.activationClientService = activationClientService;
-        System.out.println("Camada de resouce");
+//        System.out.println("Camada de resouce");
     }
 
     @PostMapping
