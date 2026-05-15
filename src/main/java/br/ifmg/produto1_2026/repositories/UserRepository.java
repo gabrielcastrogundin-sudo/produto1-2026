@@ -21,7 +21,7 @@ public interface UserRepository extends JpaRepository<User, Long> {
                            p.id as roleId,
                            p.name as authority
                            FROM tb_user u
-                           INNER JOIN tb_user up ON up.id_user = u.id
+                           INNER JOIN tb_user_perfil up ON up.id_user = u.id
                            INNER JOIN tb_perfil p On p.id = up.id_perfil
                            WHERE u.email = :username
                     """
