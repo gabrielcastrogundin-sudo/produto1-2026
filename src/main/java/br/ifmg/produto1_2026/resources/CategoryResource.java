@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
@@ -39,6 +40,7 @@ public class CategoryResource {
         return ResponseEntity.ok().body(categories);
     };
 
+    @PreAuthorize("hasAnyRole('ROLE_ADMINISTRATOR', 'ROLE_SALESMAN')")
     @GetMapping("/{id}")
     public ResponseEntity<CategoryDTO> category( @PathVariable Long id){
 
@@ -47,6 +49,7 @@ public class CategoryResource {
         return ResponseEntity.ok().body(dto);
     }
 
+    @PreAuthorize("hasAnyRole('ROLE_ADMINISTRATOR', 'ROLE_SALESMAN')")
     @PostMapping
     public ResponseEntity<CategoryDTO> insert(@RequestBody CategoryDTO dto){
         //inserindo no db e pegando o objeto criado
@@ -61,13 +64,13 @@ public class CategoryResource {
         // enviadno a categoria criada
         return ResponseEntity.created(location).body(returnDTO);
     }
-
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> delete(@PathVariable Long id){
         categoryService.delete(id);
         return ResponseEntity.noContent().build();
     }
 
+    @PreAuthorize("hasAnyRole('ROLE_ADMINISTRATOR', 'ROLE_SALESMAN')")
     @PutMapping("/{id}")
     public ResponseEntity<CategoryDTO> update(@PathVariable Long id, @RequestBody CategoryDTO dto){
         CategoryDTO returnDto = categoryService.update(id,dto);
