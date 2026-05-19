@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
@@ -58,6 +59,7 @@ public class ProductResource {
         return ResponseEntity.ok().body(dto);
     }
 
+    @PreAuthorize("hasAnyRole('ROLE_ADMINISTRATOR', 'ROLE_SALESMAN')")
     @PostMapping(produces = "application/json")
     @Operation(
             description = "A plataforma precisa disponibilizar um cadastro de produtos",
@@ -84,6 +86,7 @@ public class ProductResource {
     }
 
 
+    @PreAuthorize("hasAnyRole('ROLE_ADMINISTRATOR', 'ROLE_SALESMAN')")
     @DeleteMapping("/id")
     @Operation(
             description = "A plataforma precisa disponibilizar deleção de produtos",
@@ -103,6 +106,7 @@ public class ProductResource {
         return ResponseEntity.noContent().build();
     }
 
+    @PreAuthorize("hasAnyRole('ROLE_ADMINISTRATOR', 'ROLE_SALESMAN')")
     @PutMapping(value = "/id", produces = "application/json")
     @Operation(
             description = "A plataforma precisa disponibilizar atualização de produtos",
