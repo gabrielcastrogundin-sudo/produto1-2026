@@ -1,6 +1,7 @@
 package br.ifmg.produto1_2026.resources;
 
 import br.ifmg.produto1_2026.dto.ProductDTO;
+import br.ifmg.produto1_2026.dto.ProductListDTO;
 import br.ifmg.produto1_2026.service.ProductService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
@@ -20,6 +21,23 @@ import java.net.URI;
 @RequestMapping("/products")
 @Tag(name="Produtos")
 public class ProductResource {
+
+    @GetMapping
+    @Operation(
+            description = "retorna todos os produtos",
+            summary = "Endpoint para listar um produtos",
+            responses = {
+                    @ApiResponse( description = "Lista retornada com sucesso",responseCode = "200"),
+                    @ApiResponse( description = "Erro interno",responseCode = "500", content = {}),
+            }
+
+    )
+    public ResponseEntity<Page<ProductListDTO>> findAll(@RequestParam(value = "categoriesId", defaultValue = "0") String categoriesId,@RequestParam(value = "name", defaultValue = "") String name, Pageable pageable) {
+        Page<ProductListDTO> products =  productService.findAll(categoriesId, name, pageable);
+
+        return ResponseEntity.ok().body(products);
+    }
+
     @GetMapping
     @Operation(
             description = "retorna todos os produtos",
@@ -40,7 +58,7 @@ public class ProductResource {
     @Autowired
     private ProductService productService;
 
-    @GetMapping(value = "/{id}", produces = "application/json")
+    @GetMapping(value = "/v1/", produces = "application/json")
     @Operation(
             description = "retorna um produto",
             summary = "Endpoint para resgatar um produto usando seu id",

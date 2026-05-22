@@ -2,8 +2,10 @@ package br.ifmg.produto1_2026.service;
 
 import br.ifmg.produto1_2026.dto.CategoryDTO;
 import br.ifmg.produto1_2026.dto.ProductDTO;
+import br.ifmg.produto1_2026.dto.ProductListDTO;
 import br.ifmg.produto1_2026.entities.Category;
 import br.ifmg.produto1_2026.entities.Product;
+import br.ifmg.produto1_2026.projections.ProductProjection;
 import br.ifmg.produto1_2026.repositories.CategoryRepository;
 import br.ifmg.produto1_2026.repositories.ProductRepository;
 import br.ifmg.produto1_2026.resources.ProductResource;
@@ -14,11 +16,16 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
 import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
 import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 @Service
 public class ProductService {
@@ -29,6 +36,21 @@ public class ProductService {
     private ProductRepository productRepository;
     @Autowired
     private CategoryRepository categoryRepository;
+
+    @Transactional(readOnly = true)
+    public Page<ProductListDTO> findAll(String categoriesID, String name, Pageable pageable) {
+
+        List<Long> categoriesIDs = null;
+        if (categoriesIDs != null &&  !categoriesID.equals("0")) {
+            categoriesIDs = Arrays.asList(categoriesID.split(",")).stream().map(n->Long.valueOf(n)).toList();
+        }
+        Page<ProductProjection> products = productRepository.searchProducts(categoriesIDs, name, pageable);
+
+        List<ProductListDTO> productDTOs = products.stream().map(p->new ProductListDTO(p)).toList();
+
+        return new PageImpl<>(productDTOs, pageable, products.getTotalElements());
+
+    }
 
     @Transactional(readOnly = true)
     public Page<ProductDTO> findAll(Pageable pageable) {
