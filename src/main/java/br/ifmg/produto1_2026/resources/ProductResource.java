@@ -38,7 +38,7 @@ public class ProductResource {
         return ResponseEntity.ok().body(products);
     }
 
-    @GetMapping
+    @GetMapping(value = "/v1/")
     @Operation(
             description = "retorna todos os produtos",
             summary = "Endpoint para listar um produtos",
