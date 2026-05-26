@@ -41,6 +41,7 @@ public class CategoryResource {
     };
 
 
+
     @PreAuthorize("hasAnyRole('ROLE_ADMINISTRATOR', 'ROLE_SALESMAN')")
     @GetMapping("/{id}")
     public ResponseEntity<CategoryDTO> category( @PathVariable Long id){
