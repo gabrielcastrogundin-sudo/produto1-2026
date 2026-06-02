@@ -1143,3 +1143,5 @@ Need more flexibility with validation rules? Learn more: https://rd.gt/3AbJUZE
 2026-05-29 11:08:49.279 [main] INFO  b.i.p.Produto12026Application - Started Produto12026Application in 13.033 seconds (process running for 13.267)
 2026-05-29 11:08:49.281 [main] WARN  o.s.c.events.SpringDocAppInitializer - SpringDoc /api-docs endpoint is enabled by default. To disable it in production, set the property 'springdoc.api-docs.enabled=false'
 2026-05-29 11:08:49.281 [main] WARN  o.s.c.events.SpringDocAppInitializer - SpringDoc /swagger-ui.html endpoint is enabled by default. To disable it in production, set the property 'springdoc.swagger-ui.enabled=false'
+2026-05-29 11:40:13.295 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown initiated...
+2026-05-29 11:40:13.296 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown completed.

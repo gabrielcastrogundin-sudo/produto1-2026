@@ -1,9 +1,6 @@
 package br.ifmg.produto1_2026.service;
 
-import br.ifmg.produto1_2026.dto.PerfilDTO;
-import br.ifmg.produto1_2026.dto.RequestTokenDTO;
-import br.ifmg.produto1_2026.dto.UserDTO;
-import br.ifmg.produto1_2026.dto.UserInsertDTO;
+import br.ifmg.produto1_2026.dto.*;
 import br.ifmg.produto1_2026.entities.PasswordRecover;
 import br.ifmg.produto1_2026.entities.Perfil;
 import br.ifmg.produto1_2026.entities.User;
@@ -23,6 +20,7 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.net.URI;
 import java.time.Instant;
+import java.util.List;
 import java.util.UUID;
 
 @Service
@@ -65,7 +63,7 @@ public class AuthService {
         passwordRecoverRepository.save(entity);
         String text = "Acesse o link para definir uma nova senha (válido por " + tokenMinutes + " minutos):\n\n"
                 + recoverUri + token;
-        emailService.sendEmail(body.getEmail(), "Recuperação de senha", text);
+        emailService.sendMail( new EmailDTO(entity.getEmail(), "Recperação de senha", text));
     }
 
     private void copyDtoToUser(UserDTO dto, User user) {
@@ -92,4 +90,17 @@ public class AuthService {
         return new UserDTO(user);
     }
 
+    public void saveNewPassword(@Valid NewPasswordDTO dto) {
+
+        List<PasswordRecover> list = passwordRecoverRepository.searchValidTokens(dto.getToken(), Instant.now());
+
+        if(list.isEmpty()) {
+            throw new ResourceNotFound("Token not found or expired");
+        }
+
+        User user = userRepository.findByEmail(list.getFirst().getEmail());
+
+        user.setPassword(encoder.encode(dto.getPassword()));
+
+    }
 }
