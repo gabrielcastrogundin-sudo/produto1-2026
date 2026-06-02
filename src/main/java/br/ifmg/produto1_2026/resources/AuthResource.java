@@ -1,9 +1,6 @@
 package br.ifmg.produto1_2026.resources;
 
-import br.ifmg.produto1_2026.dto.PerfilDTO;
-import br.ifmg.produto1_2026.dto.RequestTokenDTO;
-import br.ifmg.produto1_2026.dto.UserDTO;
-import br.ifmg.produto1_2026.dto.UserInsertDTO;
+import br.ifmg.produto1_2026.dto.*;
 import br.ifmg.produto1_2026.entities.Perfil;
 import br.ifmg.produto1_2026.entities.User;
 import br.ifmg.produto1_2026.repositories.PerfilRepository;
@@ -52,7 +49,13 @@ public class AuthResource {
 
     @PostMapping(value = "/recover-token")
     public ResponseEntity<Void> createRecoverToken(@Valid @RequestBody RequestTokenDTO dto) {
-        AuthService.createRecoverToken(dto);
+        authService.createRecoverToken(dto);
+        return ResponseEntity.noContent().build();
+    }
+
+    @PostMapping(value = "/new-password")
+    public ResponseEntity<Void> newPassword(@Valid @RequestBody NewPasswordDTO dto) {
+        authService.saveNewPassword(dto);
         return ResponseEntity.noContent().build();
     }
 }
